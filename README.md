@@ -48,18 +48,16 @@ OPTFF has 5 misses and 3 hits:
 | 8 | 4 | {2,4,3} | Hit | {2,4,3} |
 
 Cycling through k + 1 = 4 distinct items causes conflict for LRU because it always evicts the least recently used item, where in a cycle happens to be the one needed next. OPTFF avoids this by looking ahead, as step 4 it evicts item 3 (farthest future use) instead of item 1, keeping the items needed at steps 5 and 6. This yields 3 hits that LRU cannot achieve.
-### Question 3:
-Let OPTFF solution be O, and any other arbitrary sequence be A.
-Consider the first difference between O and A, which occurs at request i which requests item d.
-Let the evicted item from O be b, and from A be a.
-Case 1, if a=b, then this is not a difference between O and A. 
-Case 2, If d is already present, then O does not evict any entries and A could not reduce the number of evictions by bringing a duplicate entry into the cache.
-Case 3, if a!=b, then let the first step after this where O and A differ be j which requests item c.
-It is impossible for c=a because the OPTFF solution O by definition evicts the entry which will not be request for the longest time, otherwise c=a=b.
-If c=b, then O must evict some entry d since it evicted b. 
-If d=a, then O and A now match. If d!=a, then A can arbitrarily evict d and insert a, making O and A match.
-If d!=a and d!=b, then A can evict b, making O and A match.
-This comparsion can recurse, and in every case O has no more evictions than the sequence A.
+### Question 3: Prove OPTFF is Optimal
+Let A be any offline algorithm We transform A into OPTFF one decision at a time without increasing misses.
+Suppose A and OPTFF agree through step t-1, so their caches are identical. At step 1 both miss and must evict. OPTFF evices item f (farthest next use), A evicts item a != f. Define A' as A but evicting f instead of a at step t.
+After step t, A has f but not a, A' has a but not f. Since f has the farthest next use, a must be requested before f.
+
+Case 1: a is requested before f. A' hits on a , A misses. If f is later requested, A' misses while A hits and the costs cancel. If f is never requested agin, A' wins. Either way, misses(A') <= misses(A).
+
+Case 2: f is requested before a. This is impossible. OPTFF chose f precisesly because it has the farthest next use among all cached items, so next_use(a_ <= next_use(f), meaning a must come first
+
+Only Case 1 applies, so misses(A') <= misses(A). Repeating at every disagreement transforms A into OPTFF without increasing misses, giving misses(OPTFF) <= misses(A) for any A.
 ## Authors
 - Philip Baptist
 - Ansh Gupta
