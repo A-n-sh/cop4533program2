@@ -20,8 +20,32 @@ r1 r2 r3 ... rm
 - OPTFF has the fewest misses in every case
 - FIFO is better than LRU in 2/3 of the test cases provided
 ### Question 2: Bad Sequence for LRU or FIFO
-- examples/example1.in has k=3 and OPTFF yields 21 misses compared to FIFO's 28 and LRU's 32.
-- OPTFF is an optimal algorithm at minimizing the number of misses, so LRU or FIFO can do no better than OPTFF. In this particular case, OPTFF performs strictly better than both LRU and FIFO.
+For k = 3, consider the sequence 1 2 3 4 1 2 3 4
+LRU has 8 misses and 0 hits:
+| Step | Request | Cache Before | Action | Cache After|
+| ------- | --- | --- | ---- | ---- | -----|
+| 1 | 1 | {} | Insert | {1} |
+| 2 | 2 | {1} | Insert | {1,2} |
+| 3 | 3 | {1,2} | Insert | {1,2,3} |
+| 4 | 4 | {1,2,3} | Evict 1 | {2,3,4} |
+| 5 | 1 | {2,3,4} | Evict 2 | {3,4,1} |
+| 6 | 2 | {3,4,1} | Evict 3 | {4,1,2} |
+| 7 | 3 | {4,1,2} | Evict 4 | {1,2,3} |
+| 8 | 4 | {1,2,3} | Evict 1 | {2,3,4} |
+LRU thrashes as it always evicts the item that is about to be needed next
+
+OPTFF has 5 misses and 3 hits:
+| Step | Request | Cache Before | Action | Cache After|
+| ------- | --- | --- | ---- | ---- | -----|
+| 1 | 1 | {} | Insert | {1} |
+| 2 | 2 | {1} | Insert | {1,2} |
+| 3 | 3 | {1,2} | Insert | {1,2,3} |
+| 4 | 4 | {1,2,3} | Evict 3 | {1,2,4} |
+| 5 | 1 | {1,2,4} | Hit | {1,2,4} |
+| 6 | 2 | {1,2,4} | Hit | {1,2,4} |
+| 7 | 3 | {1,2,4} | Evict 1 | {2,4,3} |
+| 8 | 4 | {2,4,3} | Hit | {2,4,3} |
+Cycling through k + 1 = 4 distinct items causes conflict for LRU because it always evicts the least recently used item, where in a cycle happens to be the one needed next. OPTFF avoids this by looking ahead, as step 4 it evicts item 3 (farthest future use) instead of item 1, keeping the items needed at steps 5 and 6. This yields 3 hits that LRU cannot achieve.
 ### Question 3:
 Let OPTFF solution be O, and any other arbitrary sequence be A.
 Consider the first difference between O and A, which occurs at request i which requests item d.
