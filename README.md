@@ -25,7 +25,7 @@ r1 r2 r3 ... rm
 ### Question 3:
 Let OPTFF solution be O, and any other arbitrary sequence be A.
 Consider the first difference between O and A, which occurs at request i which requests item d.
-Let the evicted index from O be b, and from A be a.
+Let the evicted item from O be b, and from A be a.
 Case 1, if a=b, then this is not a difference between O and A. 
 Case 2, If d is already present, then O does not evict any entries and A could not reduce the number of evictions by bringing a duplicate entry into the cache.
 Case 3, if a!=b, then let the first step after this where O and A differ be j which requests item c.
