@@ -33,7 +33,7 @@ LRU has 8 misses and 0 hits:
 | 7 | 3 | {4,1,2} | Evict 4 | {1,2,3} |
 | 8 | 4 | {1,2,3} | Evict 1 | {2,3,4} |
 
--LRU thrashes as it always evicts the item that is about to be needed next
+LRU thrashes as it always evicts the item that is about to be needed next
 
 OPTFF has 5 misses and 3 hits:
 | Step | Request | Cache Before | Action | Cache After|
@@ -47,7 +47,7 @@ OPTFF has 5 misses and 3 hits:
 | 7 | 3 | {1,2,4} | Evict 1 | {2,4,3} |
 | 8 | 4 | {2,4,3} | Hit | {2,4,3} |
 
--Cycling through k + 1 = 4 distinct items causes conflict for LRU because it always evicts the least recently used item, where in a cycle happens to be the one needed next. OPTFF avoids this by looking ahead, as step 4 it evicts item 3 (farthest future use) instead of item 1, keeping the items needed at steps 5 and 6. This yields 3 hits that LRU cannot achieve.
+Cycling through k + 1 = 4 distinct items causes conflict for LRU because it always evicts the least recently used item, where in a cycle happens to be the one needed next. OPTFF avoids this by looking ahead, as step 4 it evicts item 3 (farthest future use) instead of item 1, keeping the items needed at steps 5 and 6. This yields 3 hits that LRU cannot achieve.
 ### Question 3:
 Let OPTFF solution be O, and any other arbitrary sequence be A.
 Consider the first difference between O and A, which occurs at request i which requests item d.
