@@ -22,8 +22,8 @@ r1 r2 r3 ... rm
 ### Question 2: Bad Sequence for LRU or FIFO
 For k = 3, consider the sequence 1 2 3 4 1 2 3 4
 LRU has 8 misses and 0 hits:
-| Step | Request | Cache Before | Action | Cache After|
-| ------- | --- | --- | ---- | ---- | -----|
+| Step | Request | Cache Before | Action | Cache After |
+| ------ | --------- | --- | ---- | --------- |
 | 1 | 1 | {} | Insert | {1} |
 | 2 | 2 | {1} | Insert | {1,2} |
 | 3 | 3 | {1,2} | Insert | {1,2,3} |
@@ -36,7 +36,7 @@ LRU thrashes as it always evicts the item that is about to be needed next
 
 OPTFF has 5 misses and 3 hits:
 | Step | Request | Cache Before | Action | Cache After|
-| ------- | --- | --- | ---- | ---- | -----|
+| ------- | --- | --- | ---- | ---- |
 | 1 | 1 | {} | Insert | {1} |
 | 2 | 2 | {1} | Insert | {1,2} |
 | 3 | 3 | {1,2} | Insert | {1,2,3} |
