@@ -50,12 +50,12 @@ OPTFF has 5 misses and 3 hits:
 Cycling through k + 1 = 4 distinct items causes conflict for LRU because it always evicts the least recently used item, where in a cycle happens to be the one needed next. OPTFF avoids this by looking ahead, as step 4 it evicts item 3 (farthest future use) instead of item 1, keeping the items needed at steps 5 and 6. This yields 3 hits that LRU cannot achieve.
 ### Question 3: Prove OPTFF is Optimal
 Let A be any offline algorithm We transform A into OPTFF one decision at a time without increasing misses.
-Suppose A and OPTFF agree through step t-1, so their caches are identical. At step 1 both miss and must evict. OPTFF evices item f (farthest next use), A evicts item a != f. Define A' as A but evicting f instead of a at step t.
+Suppose A and OPTFF agree through step t-1, so their caches are identical. At step t both miss and must evict. OPTFF evicts item f (farthest next use), A evicts item a != f. Define A' as A but evicting f instead of a at step t.
 After step t, A has f but not a, A' has a but not f. Since f has the farthest next use, a must be requested before f.
 
-Case 1: a is requested before f. A' hits on a , A misses. If f is later requested, A' misses while A hits and the costs cancel. If f is never requested agin, A' wins. Either way, misses(A') <= misses(A).
+Case 1: a is requested before f. A' hits on a , A misses. If f is later requested, A' misses while A hits and the costs cancel. If f is never requested again, A' wins. Either way, misses(A') <= misses(A).
 
-Case 2: f is requested before a. This is impossible. OPTFF chose f precisesly because it has the farthest next use among all cached items, so next_use(a_ <= next_use(f), meaning a must come first
+Case 2: f is requested before a. This is impossible. OPTFF chose f precisely because it has the farthest next use among all cached items, so next_use(a) <= next_use(f), meaning a must come first
 
 Only Case 1 applies, so misses(A') <= misses(A). Repeating at every disagreement transforms A into OPTFF without increasing misses, giving misses(OPTFF) <= misses(A) for any A.
 ## Authors
