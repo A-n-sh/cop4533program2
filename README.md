@@ -34,6 +34,6 @@ If c=b, then O must evict some entry d since it evicted b.
 If d=a, then O and A now match. If d!=a, then A can arbitrarily evict d and insert a, making O and A match.
 If d!=a and d!=b, then A can evict b, making O and A match.
 This comparsion can recurse, and in every case O has no more evictions than the sequence A.
-### Authors
+## Authors
 - Philip Baptist
 - Ansh Gupta
