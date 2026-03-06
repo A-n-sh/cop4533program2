@@ -1,5 +1,5 @@
 # **Cache Simulator**
-Simulates three cache eviction policies - FIFO, LRU, and OPTFF (Belady's Farther-in-Future) - on a shared request sequence and reports the number of cache misses for each
+Simulates three cache eviction policies - FIFO, LRU, and OPTFF (Belady's Farthest-in-Future) - on a shared request sequence and reports the number of cache misses for each
 ## Usage
 - Requires python 3
 `python src/cachesim.py <input_file>`
