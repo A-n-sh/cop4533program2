@@ -55,7 +55,7 @@ After step t, A has f but not a, A' has a but not f. Since f has the farthest ne
 
 Case 1: a is requested before f. A' hits on a , A misses. If f is later requested, A' misses while A hits and the costs cancel. If f is never requested again, A' wins. Either way, misses(A') <= misses(A).
 
-Case 2: f is requested before a. This is impossible. OPTFF chose f precisely because it has the farthest next use among all cached items, so next_use(a) <= next_use(f), meaning a must come first
+Case 2: f is requested before a. This is impossible. OPTFF chose f precisely because it has the farthest next use among all cached items, so next_use(a) <= next_use(f), meaning a must come first.
 
 Only Case 1 applies, so misses(A') <= misses(A). Repeating at every disagreement transforms A into OPTFF without increasing misses, giving misses(OPTFF) <= misses(A) for any A.
 ## Authors
