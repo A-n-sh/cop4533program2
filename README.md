@@ -59,5 +59,5 @@ Case 2: f is requested before a. This is impossible. OPTFF chose f precisely bec
 
 Only Case 1 applies, so misses(A') <= misses(A). Repeating at every disagreement transforms A into OPTFF without increasing misses, giving misses(OPTFF) <= misses(A) for any A.
 ## Authors
-- Philip Baptist (UFID: )
-- Ansh Gupta (UFID: 9918760)
+- Philip Baptist
+- Ansh Gupta
